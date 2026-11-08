@@ -1,0 +1,8 @@
+tests/
+firmware/
+docs/
+*.md
+*.db
+.playwright-mcp/
+.gitignore
+.git
