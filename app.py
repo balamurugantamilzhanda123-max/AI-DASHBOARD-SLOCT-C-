@@ -10,27 +10,25 @@ Ready for Future Arduino Nano Serial Hardware Integration
 
 import streamlit as st
 import os
+from http.server import BaseHTTPRequestHandler
 
 # ------------------------------------------------------------------------------
-# Vercel Serverless Function Entrypoint Compatibility
-# Guarantees Vercel CLI discovers top-level "app", "application", and "handler"
+# Vercel Serverless Function Top-Level Entrypoint
+# Explicitly exported for Vercel CLI (resolves [PYTHON_ENTRYPOINT_NOT_FOUND])
 # ------------------------------------------------------------------------------
-try:
-    from api.index import handler as _VercelHandler
-    handler = _VercelHandler
-    app = _VercelHandler
-    application = _VercelHandler
-except Exception:
-    from http.server import BaseHTTPRequestHandler
-    class _FallbackHandler(BaseHTTPRequestHandler):
-        def do_GET(self):
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        try:
+            from api.index import handler as _h
+            return _h.do_GET(self)
+        except Exception:
             self.send_response(200)
-            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(b"AI Digital Communication Signal Monitor & Fault Detection System")
-    handler = _FallbackHandler
-    app = _FallbackHandler
-    application = _FallbackHandler
+            self.wfile.write(b"<h1>AI Digital Communication Signal Monitor & Fault Detection System</h1>")
+
+app = handler
+application = handler
 
 # ------------------------------------------------------------------------------
 # Streamlit Interactive Dashboard Runtime Execution
