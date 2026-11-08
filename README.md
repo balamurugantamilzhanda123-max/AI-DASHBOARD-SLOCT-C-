@@ -24,9 +24,18 @@ Inspired by modern **Network Operations Center (NOC)** platforms, **Industrial I
 ```text
 SLOT C AI WEB/
 ├── app.py                     # Main application entry point & modular routing harness
-├── requirements.txt           # Project Python dependencies
+├── requirements.txt           # Core Serverless / ML dependencies (NumPy, Pandas, Scikit-learn)
+├── requirements-dashboard.txt # Full Dashboard dependencies (Streamlit, Plotly, PySerial, OpenPyXL)
 ├── README.md                  # Project documentation & operational handbook
 ├── .gitignore                 # Git ignore rules for Python, virtual environments, and caches
+├── .vercelignore              # Deployment exclusion rules for Vercel Serverless runtime
+├── vercel.json                # Vercel Serverless Function & rewrite configuration
+├── Procfile                   # Containerized cloud start command (Render / Railway / Heroku)
+├── api/
+│   └── index.py               # Vercel Serverless Gateway & REST API entrypoint
+├── firmware/
+│   ├── arduino_nano_tx/       # Arduino Nano Transmitter C++ sketch
+│   └── arduino_nano_rx/       # Arduino Nano Receiver & USB forwarder C++ sketch
 ├── styles/
 │   └── theme.css              # Premium futuristic dark theme (Midnight Navy, Electric Blue, Cyan)
 ├── components/
@@ -63,7 +72,7 @@ SLOT C AI WEB/
 │   ├── HARDWARE_PROTOCOL.md   # Serial protocol specification & ready-to-flash Arduino Nano C++ firmware
 │   └── progress.md            # Phase tracking & verification milestone log
 ├── tests/
-│   └── test_system.py         # Automated unit test suite (10/10 automated tests passing)
+│   └── test_system.py         # Automated unit test suite (11/11 automated tests passing)
 └── utils/
     ├── __init__.py
     ├── exporter.py            # CSV and OpenPyXL styled multi-sheet Excel generator
@@ -81,12 +90,18 @@ SLOT C AI WEB/
 - **Hardware Serial Interface**: [PySerial](https://pyserial.readthedocs.io/)
 - **Report Generation**: [OpenPyXL](https://openpyxl.readthedocs.io/) (Styled Multi-Tab Excel)
 - **Database Engine**: [SQLite3](https://www.sqlite.org/) (Embedded persistent storage)
+- **Cloud Gateways**: Vercel Serverless Functions (`api/index.py`) & Render / Streamlit Cloud
 
 ---
 
 ## ⚙️ How to Run the Application
 
 ### 1. Install Dependencies
+For the full interactive dashboard (recommended):
+```bash
+pip install -r requirements-dashboard.txt
+```
+Or for the lightweight headless machine-learning API only:
 ```bash
 pip install -r requirements.txt
 ```
