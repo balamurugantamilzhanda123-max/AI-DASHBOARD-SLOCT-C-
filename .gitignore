@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Local Environment & Tooling
+.env
+.venv/
+env/
+venv/
+ENV/
+.playwright-mcp/
+
+# Local databases & logs
+*.log
+*.sqlite3
+signal_monitor.db
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
