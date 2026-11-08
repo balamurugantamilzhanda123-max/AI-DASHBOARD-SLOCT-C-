@@ -8,7 +8,6 @@ Designed for Final-Year Engineering Project
 Ready for Future Arduino Nano Serial Hardware Integration
 """
 
-import streamlit as st
 import os
 from http.server import BaseHTTPRequestHandler
 
@@ -34,7 +33,14 @@ application = handler
 # Streamlit Interactive Dashboard Runtime Execution
 # Executes only when running under Streamlit engine (local or Streamlit Cloud)
 # ------------------------------------------------------------------------------
-if st.runtime.exists():
+try:
+    import streamlit as st
+    STREAMLIT_AVAILABLE = True
+except ImportError:
+    STREAMLIT_AVAILABLE = False
+    st = None
+
+if STREAMLIT_AVAILABLE and st.runtime.exists():
     # 1. Streamlit Wide Layout & Branding Config
     st.set_page_config(
         page_title="AI Digital Communication Signal Monitor & Fault Detection",

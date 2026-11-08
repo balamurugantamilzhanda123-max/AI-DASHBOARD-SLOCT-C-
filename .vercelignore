@@ -6,3 +6,4 @@ docs/
 .playwright-mcp/
 .gitignore
 .git
+requirements-dashboard.txt
