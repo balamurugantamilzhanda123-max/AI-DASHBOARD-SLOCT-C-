@@ -132,6 +132,13 @@ class TestDigitalCommunicationSystem(unittest.TestCase):
         excel_bytes = generate_excel_report("Test Report", {"Sheet1": df})
         self.assertGreater(len(excel_bytes), 0)
 
+    def test_vercel_serverless_gateway(self):
+        import api.index as vercel_api
+        self.assertTrue(hasattr(vercel_api, "handler"))
+        self.assertTrue(hasattr(vercel_api, "app"))
+        self.assertTrue(hasattr(vercel_api, "application"))
+        self.assertTrue(vercel_api.CORE_LOADED)
+
 
 if __name__ == "__main__":
     unittest.main()

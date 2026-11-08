@@ -475,3 +475,4 @@ class handler(BaseHTTPRequestHandler):
 # WSGI / ASGI Export compatibility
 app = handler
 application = handler
+
